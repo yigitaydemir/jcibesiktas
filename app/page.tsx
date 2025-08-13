@@ -18,14 +18,17 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-[#21409A]/95 backdrop-blur-sm z-50">
+      <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-sm z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <div className="text-white">
-                <div className="text-2xl font-bold">JCI</div>
-                <div className="text-sm">Türkiye</div>
-              </div>
+              <Image
+                src="/images/logopng.png"
+                alt="JCI Türkiye Logo"
+                width={120}
+                height={40}
+                className="h-10 w-auto"
+              />
             </div>
             
             {/* Desktop Navigation */}
@@ -87,8 +90,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Black Overlay */}
-        <div className="absolute inset-0 bg-black/50"></div>
+        {/* Gradient Overlay - Transparent at bottom, black at top */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 via-black/40 to-transparent"></div>
 
         {/* Centered Content */}
         <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -130,48 +133,99 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Wave Separator */}
+      <div className="relative w-full overflow-hidden">
+        <div className="wave-container">
+          <svg 
+            className="wave-animation" 
+            viewBox="0 0 1200 120" 
+            preserveAspectRatio="none"
+          >
+            <path 
+              d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" 
+              opacity=".25" 
+              fill="url(#gradient1)"
+            ></path>
+            <path 
+              d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" 
+              opacity=".5" 
+              fill="url(#gradient2)"
+            ></path>
+            <path 
+              d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" 
+              fill="url(#gradient3)"
+            ></path>
+            <defs>
+              <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#21409A" />
+                <stop offset="50%" stopColor="#3B82F6" />
+                <stop offset="100%" stopColor="#1E40AF" />
+              </linearGradient>
+              <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#1E40AF" />
+                <stop offset="50%" stopColor="#3B82F6" />
+                <stop offset="100%" stopColor="#21409A" />
+              </linearGradient>
+              <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#3B82F6" />
+                <stop offset="50%" stopColor="#60A5FA" />
+                <stop offset="100%" stopColor="#3B82F6" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+
       {/* About Section */}
       <section id="about" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">JCI Nedir?</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Junior Chamber International (JCI) organizasyonu 2023 yılı itibariyle dünyanın 
-              105 ülkesinde 5.000'den fazla şubesi ve 160.000 üye sayısı ile dünyanın en 
-              büyük sivil toplum kuruluşlarından biridir.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-12 items-start mb-12">
+            {/* Left Side - JCI Nedir */}
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Vizyonumuz</h3>
-              <p className="text-lg text-gray-600 mb-6">
-                Dünyanın önde gelen genç liderler ağı olmak.
-              </p>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Misyonumuz</h3>
-              <p className="text-lg text-gray-600">
-                Gençleri olumlu değişim yaratmaları için güçlendiren liderlik geliştirme 
-                fırsatları sağlamak.
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">JCI Nedir?</h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Junior Chamber International (JCI) organizasyonu 2023 yılı itibariyle dünyanın 
+                105 ülkesinde 5.000'den fazla şubesi ve 160.000 üye sayısı ile dünyanın en 
+                büyük sivil toplum kuruluşlarından biridir.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl">
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">105</div>
-                  <div className="text-gray-600">Ülke</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">5,000+</div>
-                  <div className="text-gray-600">Şube</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">160,000</div>
-                  <div className="text-gray-600">Üye</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">108</div>
-                  <div className="text-gray-600">Yıl</div>
-                </div>
+
+            {/* Right Side - Vizyonumuz and Misyonumuz */}
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Vizyonumuz</h3>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Dünyanın önde gelen genç liderler ağı olmak.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Misyonumuz</h3>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  Gençleri olumlu değişim yaratmaları için güçlendiren liderlik geliştirme 
+                  fırsatları sağlamak.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Numbers Row - Full Width */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl">
+            <div className="grid grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-600 mb-2">105</div>
+                <div className="text-gray-600">Ülke</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-600 mb-2">5,000+</div>
+                <div className="text-gray-600">Şube</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-600 mb-2">160,000</div>
+                <div className="text-gray-600">Üye</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-blue-600 mb-2">108</div>
+                <div className="text-gray-600">Yıl</div>
               </div>
             </div>
           </div>
@@ -179,60 +233,60 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-16 bg-gray-50">
+      <section id="services" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Hizmetlerimiz</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Fırsatlar</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              JCI üyelerine sunduğumuz temel hizmetler ve fırsatlar
+              JCI üyelerine sunduğumuz temel fırsatlar ve gelişim alanları
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <Globe className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Uluslararası Fırsatlar</h3>
-              <p className="text-gray-600">
-                Dünyanın her yerinde üyelerini aynı sıcaklık ve ilgiyle karşılayacak 
-                diğer üyelere ulaşabiliyor olmaktır.
-              </p>
-            </div>
+                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+             <div className="opportunity-card bg-white p-6 rounded-xl shadow-sm text-center relative overflow-hidden group">
+               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto transition-transform duration-300 group-hover:scale-110">
+                 <Globe className="w-6 h-6 text-blue-600 transition-transform duration-300 group-hover:scale-110" />
+               </div>
+               <h3 className="text-xl font-semibold text-gray-900 mb-3 transition-all duration-300 group-hover:font-bold">Uluslararası Fırsatlar</h3>
+               <p className="text-gray-600">
+                 Dünyanın her yerinde üyelerini aynı sıcaklık ve ilgiyle karşılayacak 
+                 diğer üyelere ulaşabiliyor olmaktır.
+               </p>
+             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <Target className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">İş Dünyası ve Girişimcilik</h3>
-              <p className="text-gray-600">
-                Ulusal ve uluslararası network, iş fırsatları sunar ve girişimcilik 
-                ekosistemine katkı sağlar.
-              </p>
-            </div>
+             <div className="opportunity-card bg-white p-6 rounded-xl shadow-sm text-center relative overflow-hidden group">
+               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto transition-transform duration-300 group-hover:scale-110">
+                 <Target className="w-6 h-6 text-blue-600 transition-transform duration-300 group-hover:scale-110" />
+               </div>
+               <h3 className="text-xl font-semibold text-gray-900 mb-3 transition-all duration-300 group-hover:font-bold">İş Dünyası ve Girişimcilik</h3>
+               <p className="text-gray-600">
+                 Ulusal ve uluslararası network, iş fırsatları sunar ve girişimcilik 
+                 ekosistemine katkı sağlar.
+               </p>
+             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <Users className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Toplumsal Etki</h3>
-              <p className="text-gray-600">
-                Toplumun ihtiyaç ve sorunlarını araştırır ve bu ihtiyaç sorunlarının 
-                çözümüne yönelik kalıcı projeler organize eder.
-              </p>
-            </div>
+             <div className="opportunity-card bg-white p-6 rounded-xl shadow-sm text-center relative overflow-hidden group">
+               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto transition-transform duration-300 group-hover:scale-110">
+                 <Users className="w-6 h-6 text-blue-600 transition-transform duration-300 group-hover:scale-110" />
+               </div>
+               <h3 className="text-xl font-semibold text-gray-900 mb-3 transition-all duration-300 group-hover:font-bold">Toplumsal Etki</h3>
+               <p className="text-gray-600">
+                 Toplumun ihtiyaç ve sorunlarını araştırır ve bu ihtiyaç sorunlarının 
+                 çözümüne yönelik kalıcı projeler organize eder.
+               </p>
+             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <Award className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Bireysel Gelişim</h3>
-              <p className="text-gray-600">
-                JCI bünyesinde yer alan Türkiye Eğitim Enstitüsü ile kurumsal bir 
-                yapıya sahiptir.
-              </p>
-            </div>
-          </div>
+             <div className="opportunity-card bg-white p-6 rounded-xl shadow-sm text-center relative overflow-hidden group">
+               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto transition-transform duration-300 group-hover:scale-110">
+                 <Award className="w-6 h-6 text-blue-600 transition-transform duration-300 group-hover:scale-110" />
+               </div>
+               <h3 className="text-xl font-semibold text-gray-900 mb-3 transition-all duration-300 group-hover:font-bold">Bireysel Gelişim</h3>
+               <p className="text-gray-600">
+                 JCI bünyesinde yer alan Türkiye Eğitim Enstitüsü ile kurumsal bir 
+                 yapıya sahiptir.
+               </p>
+             </div>
+           </div>
         </div>
       </section>
 
