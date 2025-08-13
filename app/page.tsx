@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { 
   Users, 
@@ -13,8 +15,56 @@ import {
   X,
   Shield
 } from "lucide-react";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const counters = entry.target.querySelectorAll('[data-target]');
+          counters.forEach((counter) => {
+            const target = parseInt(counter.getAttribute('data-target') || '0');
+            const suffix = counter.getAttribute('data-suffix') || '';
+            const duration = 2500; // 2.5 seconds
+            const step = target / (duration / 16); // 60fps
+            let current = 0;
+
+            const updateCounter = () => {
+              current += step;
+              if (current < target) {
+                const displayValue = Math.floor(current);
+                counter.textContent = displayValue.toLocaleString() + suffix;
+                requestAnimationFrame(updateCounter);
+              } else {
+                counter.textContent = target.toLocaleString() + suffix;
+              }
+            };
+
+            updateCounter();
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const statsSection = document.getElementById('stats-section');
+    if (statsSection) {
+      observer.observe(statsSection);
+    }
+
+    return () => {
+      if (statsSection) {
+        observer.unobserve(statsSection);
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -209,22 +259,22 @@ export default function Home() {
           </div>
 
           {/* Numbers Row - Full Width */}
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl">
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl" id="stats-section">
             <div className="grid grid-cols-4 gap-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">105</div>
+                <div className="text-3xl font-bold text-blue-600 mb-2" data-target="105">0</div>
                 <div className="text-gray-600">Ülke</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">5,000+</div>
+                <div className="text-3xl font-bold text-blue-600 mb-2" data-target="5000" data-suffix="+">0</div>
                 <div className="text-gray-600">Şube</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">160,000</div>
+                <div className="text-3xl font-bold text-blue-600 mb-2" data-target="160000">0</div>
                 <div className="text-gray-600">Üye</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">108</div>
+                <div className="text-3xl font-bold text-blue-600 mb-2" data-target="108">0</div>
                 <div className="text-gray-600">Yıl</div>
               </div>
             </div>
@@ -286,11 +336,54 @@ export default function Home() {
                  yapıya sahiptir.
                </p>
              </div>
-           </div>
-        </div>
-      </section>
+                      </div>
+         </div>
+       </section>
 
-      {/* Board Members Section */}
+       {/* Wave Separator */}
+       <div className="relative w-full overflow-hidden">
+         <div className="wave-container-small">
+           <svg 
+             className="wave-animation" 
+             viewBox="0 0 1200 60" 
+             preserveAspectRatio="none"
+           >
+             <path 
+               d="M0,30 Q300,0 600,30 T1200,30 L1200,60 L0,60 Z" 
+               opacity=".25" 
+               fill="url(#gradient1)"
+             ></path>
+             <path 
+               d="M0,30 Q300,10 600,30 T1200,30 L1200,60 L0,60 Z" 
+               opacity=".5" 
+               fill="url(#gradient2)"
+             ></path>
+             <path 
+               d="M0,30 Q300,20 600,30 T1200,30 L1200,60 L0,60 Z" 
+               fill="url(#gradient3)"
+             ></path>
+             <defs>
+               <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                 <stop offset="0%" stopColor="#21409A" />
+                 <stop offset="50%" stopColor="#3B82F6" />
+                 <stop offset="100%" stopColor="#1E40AF" />
+               </linearGradient>
+               <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                 <stop offset="0%" stopColor="#1E40AF" />
+                 <stop offset="50%" stopColor="#3B82F6" />
+                 <stop offset="100%" stopColor="#21409A" />
+               </linearGradient>
+               <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                 <stop offset="0%" stopColor="#3B82F6" />
+                 <stop offset="50%" stopColor="#60A5FA" />
+                 <stop offset="100%" stopColor="#3B82F6" />
+               </linearGradient>
+             </defs>
+           </svg>
+         </div>
+       </div>
+
+       {/* Board Members Section */}
       <section id="board" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">

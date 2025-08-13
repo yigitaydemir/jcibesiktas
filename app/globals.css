@@ -88,6 +88,13 @@ body {
   overflow: hidden;
 }
 
+.wave-container-small {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
+}
+
 .wave-animation {
   width: 100%;
   height: 100%;
