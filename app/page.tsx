@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-sm z-50">
+      <nav className="fixed top-0 w-full bg-[#21409A]/95 backdrop-blur-sm z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
@@ -105,7 +105,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section - Full Screen Carousel */}
-      <section className="relative h-screen overflow-hidden">
+      <section className="relative h-screen overflow-hidden bg-[#21409A]">
         {/* Image Carousel */}
         <div className="relative w-full h-full">
           {/* Image 1 */}
@@ -140,8 +140,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Gradient Overlay - Transparent at bottom, black at top */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 via-black/40 to-transparent"></div>
+        {/* Gradient Overlay - Transparent at bottom, blue at top */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#21409A] via-[#21409A]/80 via-[#21409A]/40 to-transparent"></div>
 
         {/* Centered Content */}
         <div className="absolute inset-0 flex items-center justify-center z-10">
